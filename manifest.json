@@ -1,7 +1,7 @@
 {
   "name": "SearchPlus",
   "version": "1.0",
-  "description": "When Google is blocked, automaticlly redirect your query to other search engine like baidu and bing.",
+  "description": "This extension help you switching in many search engines.",
   "background_page": "background.html",
   "options_page": "options.html",
   "page_action" : {

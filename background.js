@@ -5,11 +5,17 @@ chrome.webNavigation.onErrorOccurred.addListener(function(details) {
 	}
 });
 
+
+
 function checkValidSearchEngineUrl(tabId, changeInfo, tab) {
-  if (tab.url.indexOf('baidu') > -1 || tab.url.indexOf('google') > -1) {
-    // ... show the page action.
+  if (SEManager.isValidURL(tab.url)) {
     chrome.pageAction.show(tabId);
   }
 };
 
+
+
 chrome.tabs.onUpdated.addListener(checkValidSearchEngineUrl);
+
+SEManager.addSearchEngine(Google);
+SEManager.addSearchEngine(Baidu);
