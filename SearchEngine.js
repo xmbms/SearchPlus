@@ -13,18 +13,28 @@ var SearchEngine = {
 	 * @param host in lower case
 	 */
 	isValidHost  : function(host){
-		var reg = new RegExp("(.*)+\." + this.name + "\.(.*)+", "i");
-		var pattern = reg.exec(host);
-		if(!pattern || pattern.length != 3){
+		var info = this.getHostInfo(host);
+		if(!info){
 			return false;
 		}
-		if(binarySearch(pattern[1], this.prefixes) == -1){
+		if(binarySearch(info.prefix, this.prefixes) == -1){
 			return false;
 		}
-		if(binarySearch(pattern[2], this.domains) == -1){
+		if(binarySearch(info.postfix, this.domains) == -1){
 			return false;
 		}
 		return true;
+	},
+	getHostInfo : function(host){
+		var reg = new RegExp("(.*)+\." + this.name + "\.(.*)+", "i");
+		var pattern = reg.exec(host);
+		if(pattern && pattern.length == 3){
+			return {
+				prefix : pattern[1],
+				postfix: pattern[2]
+			}
+		}
+		return null;
 	},
 	/**
 	 * @return query type in (web, image, map, unknown)
@@ -63,7 +73,31 @@ var SearchEngine = {
 	 * @param  MapQuery
 	 * @return full query uri of this search engine
 	 */
-	getMapSearchURI       : function(mapQuery){}
+	getMapSearchURI       : function(mapQuery){},
+	getQueryInfo : function(url, type){
+		switch(type){
+			case "web":
+				return this.parseWebSearchURI(url);
+			case "image":
+				return this.parseImageSearchURI(url);
+			case "map":
+				return this.parseMapSearchURI(url);
+			default:
+				return "";
+		}
+	},
+	getQueryURL : function(info, type){
+		switch(type){
+			case "web":
+				return this.getWebSearchURI(info);
+			case "image":
+				return this.getImaegSearchURI(info);
+			case "map":
+				return this.getMapSearchURI(info);
+			default:
+				return "";
+		}
+	}
 }
 
 function WebQuery(){
