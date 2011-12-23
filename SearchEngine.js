@@ -39,7 +39,7 @@ var SearchEngine = {
 	/**
 	 * @return query type in (web, image, map, unknown)
 	 */
-	getQueryType : function(host, path){},
+	getQueryType : function(url){},
 	/**
 	 * if the query type is unknown, try to give a safe uri.
 	 */
@@ -96,6 +96,31 @@ var SearchEngine = {
 				return this.getMapSearchURI(info);
 			default:
 				return "";
+		}
+	},
+	joinQueryKeyWords : function(details){
+		var str = "";
+		for(var i in details){
+			str = str + i + "=" + details[i] + "&";
+		}
+		if(str.length){
+			str = str.substr(0, str.length - 1);
+		}
+		return str;
+	},
+	encode : function(content){
+		return encodeURIComponent(content || "");
+	},
+	decode : function(content){
+		content = content || "";
+		try{
+			return decodeURIComponent(content);
+		} catch(e){
+			try{
+				return $URL.decode(content); //using chrome.* API?
+			} catch(e){
+				return content;
+			}
 		}
 	}
 }

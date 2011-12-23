@@ -49,7 +49,7 @@ var SEManager = {
 			if(searchEngines[i].isValidHost(host)){
 				info.index = i;
 				info.name = searchEngines[i].name;
-				info.type = searchEngines[i].getQueryType(host, uri.path().toLowerCase());
+				info.type = searchEngines[i].getQueryType(url);
 				return info;
 			}
 		}

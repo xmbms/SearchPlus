@@ -20,6 +20,14 @@ function checkValidSearchEngineUrl(tabId, changeInfo, tab) {
 	}
 };
 
+function markSearchPlus(url){
+	if(url.indexOf("?") == -1){
+		return url + "?from=searchPlus";
+	} else {
+		return url + "&form=searchPlus";
+	}
+}
+
 function switchSearchEngine(tab){
 	var info = SEManager.getSearchEngineInfo(tab.url);
 	if(!info) return false;
@@ -28,6 +36,7 @@ function switchSearchEngine(tab){
 	var index = SEManager.searchNextSearchIndexInOrder(info.index, info.type);
 	var nextSE = SEManager.getSearchEngine(index);
 	var gotoURL = nextSE.getQueryURL(queryInfo, info.type);
+	gotoURL = markSearchPlus(gotoURL);
 	chrome.tabs.update(tab.id,{url:gotoURL});
 }
 
