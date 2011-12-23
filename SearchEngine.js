@@ -63,7 +63,7 @@ var SearchEngine = {
 	 * @param  ImageQuery
 	 * @return full query uri of this search engine
 	 */
-	getImaegSearchURI     : function(imageQuery){},
+	getImageSearchURI     : function(imageQuery){},
 	/**
 	 * @param map query uri of this search engine
 	 * @return WebQuery
@@ -91,7 +91,7 @@ var SearchEngine = {
 			case "web":
 				return this.getWebSearchURI(info);
 			case "image":
-				return this.getImaegSearchURI(info);
+				return this.getImageSearchURI(info);
 			case "map":
 				return this.getMapSearchURI(info);
 			default:
@@ -108,8 +108,12 @@ var SearchEngine = {
 		}
 		return str;
 	},
-	encode : function(content){
-		return encodeURIComponent(content || "");
+	encode : function(content, encoding){
+		if(encoding == "gbk"){
+			return $URL.encode(content || "");
+		} else {
+			return encodeURIComponent(content || "");
+		}
 	},
 	decode : function(content){
 		content = content || "";
@@ -127,10 +131,12 @@ var SearchEngine = {
 
 function WebQuery(){
 	this.content = "";
-	this.site    = "";
+	this.site    = ""; //all search engine suport the same advanced search?
+	this.intitle = "";
+	this.since   = "";
 }
 
-function imageQuery(){
+function ImageQuery(){
 	this.content = "";
 }
 

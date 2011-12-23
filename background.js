@@ -21,6 +21,7 @@ function checkValidSearchEngineUrl(tabId, changeInfo, tab) {
 };
 
 function markSearchPlus(url){
+	if(!url) return "";
 	if(url.indexOf("?") == -1){
 		return url + "?from=searchPlus";
 	} else {
@@ -37,7 +38,9 @@ function switchSearchEngine(tab){
 	var nextSE = SEManager.getSearchEngine(index);
 	var gotoURL = nextSE.getQueryURL(queryInfo, info.type);
 	gotoURL = markSearchPlus(gotoURL);
-	chrome.tabs.update(tab.id,{url:gotoURL});
+	if(gotoURL){
+		chrome.tabs.update(tab.id,{url:gotoURL});
+	}
 }
 
 
