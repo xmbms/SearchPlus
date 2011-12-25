@@ -1,7 +1,7 @@
 chrome.webNavigation.onErrorOccurred.addListener(function(details) {
 	//console.log("TabId:" + details.tabId + "\nFrameID:" + details.frameId + "\nURL:" + details.url);
 	if(details.frameId == 0){
-		chrome.tabs.update(details.tabId,{url:"http://www.baidu.com"})
+	//	chrome.tabs.update(details.tabId,{url:"http://www.baidu.com"})
 	}
 });
 
@@ -29,20 +29,77 @@ function markSearchPlus(url){
 	}
 }
 
+function getQueryContent(id, name){
+	var value = "";
+	var elem = document.getElementById(id || "");
+	if(!elem){
+		elem = document.getElementByName(name || "");
+	}
+	if(elem){
+		value = elem.value;
+	}
+	chrome.extension.sendRequest({content: value}, function() {});
+}
+
+var ActiveTabContent = "";
+var ActiveTabKey = true;
+var ActiveTimer = null;
+var ActiveQuery = {
+	id : -1,
+	info : {},
+	index : -1,
+};
+var waitResponseTime = 15;
 function switchSearchEngine(tab){
+	ActiveTabContent = "";
+	ActiveTabKey = true;
 	var info = SEManager.getSearchEngineInfo(tab.url);
 	if(!info) return false;
 	var se = SEManager.getSearchEngine(info.index);
-	var queryInfo = se.getQueryInfo(tab.url, info.type);
-	var index = SEManager.searchNextSearchIndexInOrder(info.index, info.type);
-	var nextSE = SEManager.getSearchEngine(index);
-	var gotoURL = nextSE.getQueryURL(queryInfo, info.type);
-	gotoURL = markSearchPlus(gotoURL);
-	if(gotoURL){
-		chrome.tabs.update(tab.id,{url:gotoURL});
+	var inputInfo = se.getInputInfo(info.type);
+	ActiveQuery.info = se.getQueryInfo(tab.url, info.type);
+	ActiveQuery.id = tab.id;
+	ActiveQuery.index = SEManager.searchNextSearchIndexInOrder(info.index, info.type);
+	var contentScript = getQueryContent.toString() + "; getQueryContent(\"" + 
+		inputInfo.id + "\", \"" + inputInfo.name + "\")";
+	try{
+		chrome.tabs.executeScript(null, {code:contentScript}, function(a){
+			ActiveTimer = setTimeout(function(){
+				switchURL();
+			}, waitResponseTime);
+		});
+	} catch(e){
+		switchURL(tab.id, index, ActiveQueryInfo);
 	}
 }
 
+function switchURL(){
+	clearTimeout(ActiveTimer);
+	if(ActiveTabKey){
+		ActiveTabKey = false;
+		var se = SEManager.getSearchEngine(ActiveQuery.index);
+		if(se){
+			var gotoURL = se.getQueryURL(ActiveQuery.info);
+			if(gotoURL){
+				gotoURL = markSearchPlus(gotoURL);
+				chrome.tabs.update(ActiveQuery.id,{url:gotoURL});
+			}
+		}
+	}
+	ActiveQuery = {
+		id : -1,
+		info : {},
+		index : -1
+	}
+}
+
+chrome.extension.onRequest.addListener(
+	function(request, sender, sendResponse) {
+		if(ActiveTabKey && request.content){
+			ActiveQuery.info.content = request.content;
+			switchURL();
+		}
+ });
 
 chrome.tabs.onUpdated.addListener(checkValidSearchEngineUrl);
 chrome.pageAction.onClicked.addListener(switchSearchEngine);

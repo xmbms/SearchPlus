@@ -7,6 +7,19 @@ Baidu.mapSearchSupported   = true;
 Baidu.prefixes=["www", "image", "tupian", "map", "ditu"];
 Baidu.domains = ["com","com.cn","cn","com.jp","jp"];
 
+Baidu.webSearch = {
+	id   : "kw",
+	name : "wd" 
+};
+Baidu.imageSearch = {
+	id   : "kw",
+	name : "word"
+};
+Baidu.mapSearch = {
+	id   : "PoiSearch",
+	name : "word"
+};
+
 Baidu.getQueryType = function(url){
 	var uri = new Uri(url);
 	var host = uri.host().toLowerCase();

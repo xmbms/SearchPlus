@@ -7,6 +7,18 @@ var SearchEngine = {
 	webSearchSupported   : false,
 	imageSearchSupported : false,
 	mapSearchSupported   : false,
+	webSearch : {
+		id   : "",
+		name : "" 
+	},
+	imageSearch : {
+		id   : "",
+		name : ""
+	},
+	mapSearch : {
+		id   : "",
+		name : ""
+	},
 	prefixes : [], //ascend order
 	domains  : [], //ascend order
 	/**
@@ -86,8 +98,9 @@ var SearchEngine = {
 				return "";
 		}
 	},
-	getQueryURL : function(info, type){
-		switch(type){
+	getQueryURL : function(info){
+		info = info || {};
+		switch(info.type){
 			case "web":
 				return this.getWebSearchURI(info);
 			case "image":
@@ -126,10 +139,31 @@ var SearchEngine = {
 				return content;
 			}
 		}
+	},
+	getInputInfo : function(type){
+		var info = {id:"", name:""};
+		switch(type){
+			case "web":
+				info.id = this.webSearch.id;
+				info.name = this.webSearch.name;
+				break;
+			case "image":
+				info.id = this.imageSearch.id;
+				info.name = this.imageSearch.name;
+				break;
+			case "map":
+				info.id = this.mapSearch.id;
+				info.name = this.mapSearch.name;
+				break;
+			default:
+				break;
+		}
+		return info;
 	}
 }
 
 function WebQuery(){
+	this.type = "web";
 	this.content = "";
 	this.site    = ""; //all search engine suport the same advanced search?
 	this.intitle = "";
@@ -137,10 +171,12 @@ function WebQuery(){
 }
 
 function ImageQuery(){
+	this.type = "image";
 	this.content = "";
 }
 
 function MapQuery(){
+	this.type = "map";
 	this.content = "";
 }
 

@@ -10,6 +10,8 @@
   },
   "permissions": [
 	"webNavigation",
-	"tabs"
+	"tabs",
+	"http://*/*",
+	"https://*/*"
   ]
 }
