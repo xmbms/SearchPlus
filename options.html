@@ -1,6 +1,73 @@
-<html>
-<head><title>Search Plus Options</title></head>
-<body>
-<h1>Search Plus</h1>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Search Plus Options</title>
+<link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
+<script language="JavaScript" type="text/javascript" src="lib/tool-man/toolman.js"></script>
+<script type="text/javascript">
+	var dragsort = ToolMan.dragsort()
+	var junkdrawer = ToolMan.junkdrawer()
+	window.onload = function() {
+		alert(localStorage["xm"]);
+		localStorage["xm"] = 123;
+		dragsort.makeListSortable(document.getElementById("searchlists"),
+				verticalOnly, saveOrder)
+	}
+
+	function verticalOnly(item) {
+		item.toolManDragGroup.verticalOnly()
+	}
+
+	function saveOrder(item) {
+		var group = item.toolManDragGroup
+		var list = group.element.parentNode
+		var id = list.getAttribute("id")
+		if (id == null) return
+		group.register('dragend', function() {
+			ToolMan.cookies().set("list-" + id, 
+					junkdrawer.serializeList(list), 365)
+		})
+	}
+</script>
+
+</head>
+
+<body style="width: 98%;">
+
+<div style="width: 1000px; margin: 0 auto 0 auto;">
+
+<h1>Search Plus Options</h1>
+
+<ul id="navigation">
+	<li class="selected"><a href="#">Web Search</a></li>
+	<li><a href="#">Image Search</a></li>
+	<li><a href="#">Map Search</a></li>
+	<li><a href="#">About</a></li>
+</ul>
+
+	<div id="content">
+		<div class="channel">
+		<div class="onlytwotips"><input id="imageOnlyTwo" type="checkbox">Only Use Primary and Secondary Search Engine<span class="highlight">(Just Switch no need to select Search Engine)</span></div>
+		<div class="selist">Search Engine List:<span class="highlight">(Drag & Drop Sort)</span></div>
+		<div class="searchcontiner">
+			<ul id="searchlists" class="searchegines">
+				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/google.ico">Google
+				
+				</li>
+				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/baidu.ico">Baidu</li>
+				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/bing.ico">Bing</li>
+				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/sogou.ico">Sogou</li>
+				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/Soso.ico">Soso</li>
+				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/yahoo.ico">Yahoo!</li>
+			</ul>
+			<div class="primary">Primary</div>
+			<div class="secondary">Secondary</div>
+		</div>
+		<div class="btngroup"><input class="sebtn" type="button" value="Apply" /><input  class="sebtn"  type="button" value="Reset" /></div>
+		
+		</div>
+	</div>
+</div>
 </body>
 </html>

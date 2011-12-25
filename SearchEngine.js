@@ -38,7 +38,7 @@ var SearchEngine = {
 		return true;
 	},
 	getHostInfo : function(host){
-		var reg = new RegExp("(.*)+\." + this.name + "\.(.*)+", "i");
+		var reg = new RegExp("(.*)+\." + this.name + "\.(.*)+", "i"); //chrome has a bug here
 		var pattern = reg.exec(host);
 		if(pattern && pattern.length == 3){
 			return {

@@ -106,3 +106,5 @@ chrome.pageAction.onClicked.addListener(switchSearchEngine);
 
 SEManager.addSearchEngine(Google);
 SEManager.addSearchEngine(Baidu);
+
+alert(localStorage["xm"]);

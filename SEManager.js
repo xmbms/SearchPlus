@@ -32,10 +32,13 @@ var SEManager = {
 		for(var i = 0, len = searchEngines.length; i < len; i++){
 			txt = txt + searchEngines[i].name.toLowerCase() + "\.|";
 		}
+		if(txt){
+			txt = txt.substr(0, txt.length - 1);
+		}
 		domainReg = new RegExp(txt, "i");
 	},
 	getSearchEngineInfo : function(url){
-		if(searchEngines.length && !domainReg.exec(uri)){
+		if(!(searchEngines.length && (url || "").match(domainReg))){
 			return false;
 		}
 		var uri = new Uri(url);

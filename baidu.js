@@ -86,7 +86,7 @@ Baidu.getImageSearchURI = function(info){
 
 Baidu.parseMapSearchURI = function(url){
 	var uri = new Uri(url);
-	var query = new ImageQuery();
+	var query = new MapQuery();
 	query.content = this.decode(uri.getQueryParamValue("s"));
 	query.content = query.content.replace("s&wd=", "");
 	return query;
