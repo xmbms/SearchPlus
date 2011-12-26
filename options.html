@@ -5,32 +5,7 @@
 <title>Search Plus Options</title>
 <link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
 <script language="JavaScript" type="text/javascript" src="lib/tool-man/toolman.js"></script>
-<script type="text/javascript">
-	var dragsort = ToolMan.dragsort()
-	var junkdrawer = ToolMan.junkdrawer()
-	window.onload = function() {
-		alert(localStorage["xm"]);
-		localStorage["xm"] = 123;
-		dragsort.makeListSortable(document.getElementById("searchlists"),
-				verticalOnly, saveOrder)
-	}
-
-	function verticalOnly(item) {
-		item.toolManDragGroup.verticalOnly()
-	}
-
-	function saveOrder(item) {
-		var group = item.toolManDragGroup
-		var list = group.element.parentNode
-		var id = list.getAttribute("id")
-		if (id == null) return
-		group.register('dragend', function() {
-			ToolMan.cookies().set("list-" + id, 
-					junkdrawer.serializeList(list), 365)
-		})
-	}
-</script>
-
+<script language="JavaScript" type="text/javascript" src="options.js"></script>
 </head>
 
 <body style="width: 98%;">
@@ -40,32 +15,55 @@
 <h1>Search Plus Options</h1>
 
 <ul id="navigation">
-	<li class="selected"><a href="#">Web Search</a></li>
-	<li><a href="#">Image Search</a></li>
-	<li><a href="#">Map Search</a></li>
-	<li><a href="#">About</a></li>
+	<li id="generalsearch" onclick="showOptions('general')"><a href="#">General</a></li>
+	<li id="websearch" onclick="showOptions('web')"><a href="#">Web Search</a></li>
+	<li id="imagesearch" onclick="showOptions('image')"><a href="#">Image Search</a></li>
+	<li id="mapsearch" onclick="showOptions('map')"><a href="#">Map Search</a></li>
+	<li id="aboutsearch" onclick="showOptions('about')"><a href="#">About</a></li>
 </ul>
 
 	<div id="content">
-		<div class="channel">
-		<div class="onlytwotips"><input id="imageOnlyTwo" type="checkbox">Only Use Primary and Secondary Search Engine<span class="highlight">(Just Switch no need to select Search Engine)</span></div>
-		<div class="selist">Search Engine List:<span class="highlight">(Drag & Drop Sort)</span></div>
-		<div class="searchcontiner">
-			<ul id="searchlists" class="searchegines">
-				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/google.ico">Google
-				
-				</li>
-				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/baidu.ico">Baidu</li>
-				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/bing.ico">Bing</li>
-				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/sogou.ico">Sogou</li>
-				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/Soso.ico">Soso</li>
-				<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/yahoo.ico">Yahoo!</li>
-			</ul>
-			<div class="primary">Primary</div>
-			<div class="secondary">Secondary</div>
+		<div class="channel" id="generalcontent" style="display:none">
+		<div class="generalopt">
+			<input onclick="setGeneralOption()" type="checkbox" id="autoredirect" />Auto redirect when your query were blocked.
 		</div>
-		<div class="btngroup"><input class="sebtn" type="button" value="Apply" /><input  class="sebtn"  type="button" value="Reset" /></div>
-		
+		<div class="generalopt">
+			<input onclick="setGeneralOption()" type="checkbox" id="tryfix" />Try to fix the broken URL in Google's search result.
+		</div>
+		</div>
+		<div class="channel" id="searchcontent">
+			<div class="onlytwotips"><input id="imageOnlyTwo" type="checkbox">Only Use Primary and Secondary Search Engine<span class="highlight">(Just Switch no need to select Search Engine)</span></div>
+			<div class="selist">Search Engine List:<span class="highlight">(Drag & Drop Sort)</span></div>
+			<div class="searchcontiner">
+				<ul id="searchlists" class="searchegines">
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/google.ico">Google
+					
+					</li>
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/baidu.ico">Baidu</li>
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/bing.ico">Bing</li>
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/sogou.ico">Sogou</li>
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/Soso.ico">Soso</li>
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/yahoo.ico">Yahoo!</li>
+				</ul>
+				<div class="primary">Primary</div>
+				<div class="secondary">Secondary</div>
+			</div>
+			<div>
+			<div class="btngroup"><input onclick="saveSearchOrder()" class="sebtn" type="button" value="Apply" /><input onclick="resetSearchOrder()"  class="sebtn"  type="button" value="Reset" /><span class="saved" id="savedtips" style="display:none;">Options saved...</span></div>
+			
+			</div>
+		</div>
+		<div class="channel" id="aboutcontent" style="display:none;font-family: Arial, Helvetica, sans-serif;">
+		<h3>Feature List:</h3>
+		<ol style="width:90%; padding-left:10px; padding-top:10px;">
+			<li>Help you switching in many Search Engines.</li>
+			<li>When your search querys were blocked, automaticlly redirect to another search engine.</li>
+		</ol>
+		<div style="margin-bottom:20px; margin-top:10px;font-family: Arial, Helvetica, sans-serif;">
+		<h3 style="margin-bottom:5px;">About Author:</h3>
+		<img src="http://tp3.sinaimg.cn/2156022874/50/5602257587/1" style="float:left; margin-right:10px;">FootManBoss(步兵小组长)
+		<div style="margin-top:5px"><a target="_blank" href="http://weibo.com/footmanboss">http://weibo.com/footmanboss</a></div>
+		</div>
 		</div>
 	</div>
 </div>

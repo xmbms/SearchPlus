@@ -38,7 +38,7 @@ function getQueryContent(id, name){
 	if(elem){
 		value = elem.value;
 	}
-	chrome.extension.sendRequest({content: value}, function() {});
+	//chrome.extension.sendRequest({content: value}, function() {});
 }
 
 var ActiveTabContent = "";
@@ -106,5 +106,8 @@ chrome.pageAction.onClicked.addListener(switchSearchEngine);
 
 SEManager.addSearchEngine(Google);
 SEManager.addSearchEngine(Baidu);
-
-alert(localStorage["xm"]);
+SEManager.addSearchEngine(Bing);
+SEManager.addSearchEngine(Sogou);
+SEManager.addSearchEngine(Soso);
+SEManager.addSearchEngine(Yahoo);
+SEManager.initOptions();

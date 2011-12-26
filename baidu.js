@@ -1,23 +1,25 @@
 var Baidu = {};
 ImplementInterface(Baidu, SearchEngine);
 Baidu.name = "Baidu";
-Baidu.webSearchSupported   = true;
-Baidu.imageSearchSupported = true;
-Baidu.mapSearchSupported   = true;
 Baidu.prefixes=["www", "image", "tupian", "map", "ditu"];
 Baidu.domains = ["com","com.cn","cn","com.jp","jp"];
 
+Baidu.icon = "icons/baidu.ico"
+
 Baidu.webSearch = {
-	id   : "kw",
-	name : "wd" 
+	support : true,
+	inputId   : "kw",
+	inputName : "wd" 
 };
 Baidu.imageSearch = {
-	id   : "kw",
-	name : "word"
+	support : true,
+	inputId   : "kw",
+	inputName : "word"
 };
 Baidu.mapSearch = {
-	id   : "PoiSearch",
-	name : "word"
+	support : true,
+	inputId   : "PoiSearch",
+	inputName : "word"
 };
 
 Baidu.getQueryType = function(url){

@@ -4,20 +4,20 @@
  
 var SearchEngine = {
 	name : "Search Engine",
-	webSearchSupported   : false,
-	imageSearchSupported : false,
-	mapSearchSupported   : false,
 	webSearch : {
-		id   : "",
-		name : "" 
+		support   : false,
+		inputId   : "",
+		inputName : "",
 	},
 	imageSearch : {
-		id   : "",
-		name : ""
+		support   : false,
+		inputId   : "",
+		inputName : "",
 	},
 	mapSearch : {
-		id   : "",
-		name : ""
+		support   : false,
+		inputId   : "",
+		inputName : "",
 	},
 	prefixes : [], //ascend order
 	domains  : [], //ascend order
@@ -29,16 +29,18 @@ var SearchEngine = {
 		if(!info){
 			return false;
 		}
-		if(binarySearch(info.prefix, this.prefixes) == -1){
+		if(this.prefixes.length && 
+			binarySearch(info.prefix, this.prefixes) == -1){
 			return false;
 		}
-		if(binarySearch(info.postfix, this.domains) == -1){
+		if(this.prefixes.length && 
+			binarySearch(info.postfix, this.domains) == -1){
 			return false;
 		}
 		return true;
 	},
 	getHostInfo : function(host){
-		var reg = new RegExp("(.*)+\." + this.name + "\.(.*)+", "i"); //chrome has a bug here
+		var reg = new RegExp("(.+)\." + this.name + "\.(.+)", "i");
 		var pattern = reg.exec(host);
 		if(pattern && pattern.length == 3){
 			return {
@@ -144,16 +146,16 @@ var SearchEngine = {
 		var info = {id:"", name:""};
 		switch(type){
 			case "web":
-				info.id = this.webSearch.id;
-				info.name = this.webSearch.name;
+				info.id = this.webSearch.inputId;
+				info.name = this.webSearch.inputName;
 				break;
 			case "image":
-				info.id = this.imageSearch.id;
-				info.name = this.imageSearch.name;
+				info.id = this.imageSearch.inputId;
+				info.name = this.imageSearch.inputName;
 				break;
 			case "map":
-				info.id = this.mapSearch.id;
-				info.name = this.mapSearch.name;
+				info.id = this.mapSearch.inputId;
+				info.name = this.mapSearch.inputName;
 				break;
 			default:
 				break;

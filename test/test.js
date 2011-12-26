@@ -19,6 +19,15 @@ test("Google URI Test", function() {
   equal(uri4.getQueryParamValues("sclient_searchplus").length, 0, "Empty Search Content");
 });
 
+test("Bing URI Test", function(){
+	var uri = new Uri("http://cn.bing.com/ditu/?q=1231&mkt=zh-CN&FORM=BYFD");
+	equal(uri.host(), "cn.bing.com", "Bing Host");
+	equal(uri.path(), "/ditu/", "Bing Path");
+	equal(uri.getQueryParamValue("q"), "1231", "Param values");
+	var uri2 = new Uri("http://cn.bing.com/images/search?q=2323&FORM=BIFD");
+	equal(uri2.path(), "/images/search", "Path Test")
+})
+
 module("GBK Encode and Decode")
 test("GBK Encode and Decode", function(){
 	equal($URL.encode("中文"),"%D6%D0%CE%C4", "GBK Encode");
