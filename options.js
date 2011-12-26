@@ -1,7 +1,31 @@
 var dragsort = ToolMan.dragsort();
 var junkdrawer = ToolMan.junkdrawer();
 var searchType = "web";
-window.onload = resetSearchOrder;
+window.onload = function(){
+	i18n();
+	resetSearchOrder();
+}
+
+function i18n(){
+	var map = [
+		"title", "WebSearch", "ImageSearch", "MapSearch", "AboutSearch",	
+		"autoredirecttips",	"homepagetips",	"tryfixtips", "advanced", 
+		"primayopt", "primary", "secondary", "savedtips", "features",
+		"f1", "f2", "author", "dragsort", "selisti18n"
+	];
+	var elem = null;
+	for(var i = 0, len = map.length; i < len; i++){
+		elem = document.getElementById(map[i]);
+		if(elem){
+			var msg = chrome.i18n.getMessage(map[i]);
+			if(msg){
+				elem.innerHTML = msg;
+			}
+		}
+	}
+	document.getElementById("applybtn").value = chrome.i18n.getMessage("apply");
+	document.getElementById("resetbtn").value = chrome.i18n.getMessage("reset");
+}
 
 function verticalOnly(item) {
 	item.toolManDragGroup.verticalOnly()

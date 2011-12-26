@@ -84,7 +84,11 @@ Bing.parseMapSearchURI = function(url){
 };
 
 Bing.getMapSearchURI = function(info){
-	var prefix = "http://www.bing.com/ditu/?";
+	var prefix = "http://www.bing.com/maps/?";
+	if(chrome.i18n.getMessage("@@ui_locale") == "zh_CN" 
+		|| chrome.i18n.getMessage("@@ui_locale") == "zh_TW"){
+		prefix = "http://www.bing.com/ditu/?";
+	}
 	if(!info) return prefix;
 	info.content = (info.content || "").replace("+", " ");
 	var query = {

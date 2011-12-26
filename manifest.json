@@ -1,6 +1,7 @@
 {
   "name": "SearchPlus",
   "version": "1.0",
+  "default_locale" : "en",
   "description": "This extension help you switching in many search engines.",
   "background_page": "background.html",
   "options_page": "options.html",

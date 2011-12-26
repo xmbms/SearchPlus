@@ -11,57 +11,51 @@
 
 <div style="width: 1000px; margin: 0 auto 0 auto;">
 
-<h1>Search Plus Options</h1>
+<h1 id="title">Search Plus Options</h1>
 
 <ul id="navigation">
 	<li id="generalsearch" onclick="showOptions('general')"><a href="#">Google</a></li>
-	<li id="websearch" onclick="showOptions('web')"><a href="#">Web Search</a></li>
-	<li id="imagesearch" onclick="showOptions('image')"><a href="#">Image Search</a></li>
-	<li id="mapsearch" onclick="showOptions('map')"><a href="#">Map Search</a></li>
-	<li id="aboutsearch" onclick="showOptions('about')"><a href="#">About</a></li>
+	<li id="websearch" onclick="showOptions('web')"><a href="#" id="WebSearch">Web Search</a></li>
+	<li id="imagesearch" onclick="showOptions('image')"><a href="#" id="ImageSearch">Image Search</a></li>
+	<li id="mapsearch" onclick="showOptions('map')"><a href="#" id="MapSearch">Map Search</a></li>
+	<li id="aboutsearch" onclick="showOptions('about')"><a href="#" id="AboutSearch">About</a></li>
 </ul>
 
 	<div id="content">
 		<div class="channel" id="generalcontent" style="display:none">
 		<div class="generalopt">
-			<input onclick="setGeneralOption()" type="checkbox" id="autoredirect" />Auto redirect when your query were blocked.
+			<input onclick="setGeneralOption()" type="checkbox" id="autoredirect" /><span id="autoredirecttips">Auto redirect when your query were blocked.</span>
 		</div>
 		<div class="generalopt">
-			<input onclick="setGeneralOption()" type="checkbox" id="homepage" />Redirect Google's homepage when it were blocked.
+			<input onclick="setGeneralOption()" type="checkbox" id="homepage" /><span id="homepagetips">Redirect Google's homepage when it were blocked.</span>
 		</div>
 		<div class="generalopt">
-			<input onclick="setGeneralOption()" type="checkbox" id="tryfix" />Try to fix the broken URL in Google's search result.
+			<input onclick="setGeneralOption()" type="checkbox" id="tryfix" /><span id="tryfixtips">Try to fix the broken URL in Google's search result.</span>
 		</div>
 		</div>
 		<div class="channel" id="searchcontent">
-			<div class="selist">Advanced Options:</div>
-			<div class="onlytwotips"><input id="imageOnlyTwo" type="checkbox">Only Use Primary and Secondary Search Engine<span class="highlight">(Just Switch no need to select Search Engine)</span></div>
-			<div class="selist">Search Engine List:<span class="highlight">(Drag & Drop Sort)</span></div>
+			<div class="selist" id="advanced">Advanced Options:</div>
+			<div class="onlytwotips"><input id="imageOnlyTwo" type="checkbox"><span id="primayopt">Only Use Primary and Secondary Search Engine</span></div>
+			<div class="selist" id="selisti18n">Search Engine List:<span class="highlight" id="dragsort">(Drag & Drop Sort)</span></div>
 			<div class="searchcontiner">
 				<ul id="searchlists" class="searchegines">
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/google.ico">Google</li>
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/baidu.ico">Baidu</li>
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/bing.ico">Bing</li>
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/sogou.ico">Sogou</li>
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/Soso.ico">Soso</li>
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/yahoo.ico">Yahoo</li>
 				</ul>
-				<div class="primary">Primary</div>
-				<div class="secondary">Secondary</div>
+				<div class="primary" id="primary">Primary</div>
+				<div class="secondary" id="secondary">Secondary</div>
 			</div>
 			<div>
-			<div class="btngroup"><input onclick="saveSearchOrder()" class="sebtn" type="button" value="Apply" /><input onclick="resetSearchOrder()"  class="sebtn"  type="button" value="Reset" /><span class="saved" id="savedtips" style="display:none;">Options saved...</span></div>
+			<div class="btngroup"><input onclick="saveSearchOrder()" class="sebtn" id="applybtn" type="button" value="Apply" /><input id="resetbtn" onclick="resetSearchOrder()"  class="sebtn"  type="button" value="Reset" /><span class="saved" id="savedtips" style="display:none;">Options saved...</span></div>
 			
 			</div>
 		</div>
 		<div class="channel" id="aboutcontent" style="display:none;font-family: Arial, Helvetica, sans-serif;">
-		<h3>Feature List:</h3>
+		<h3 id="features">Feature List:</h3>
 		<ol style="width:90%; padding-left:10px; padding-top:10px;">
-			<li>Help you switching in many Search Engines.</li>
-			<li>When your search querys were blocked, automaticlly redirect to another search engine.</li>
+			<li id="f1">Help you switching in many Search Engines.</li>
+			<li id="f2">When your search querys were blocked, automaticlly redirect to another search engine.</li>
 		</ol>
 		<div style="margin-bottom:20px; margin-top:10px;font-family: Arial, Helvetica, sans-serif;">
-		<h3 style="margin-bottom:5px;">About Author:</h3>
+		<h3 style="margin-bottom:5px;" id="author">About Author:</h3>
 		<img src="http://tp3.sinaimg.cn/2156022874/50/5602257587/1" style="float:left; margin-right:10px;">FootManBoss(步兵小组长)
 		<div style="margin-top:5px"><a target="_blank" href="http://weibo.com/footmanboss">http://weibo.com/footmanboss</a></div>
 		</div>
