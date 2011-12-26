@@ -7,7 +7,6 @@
 <script language="JavaScript" type="text/javascript" src="lib/tool-man/toolman.js"></script>
 <script language="JavaScript" type="text/javascript" src="options.js"></script>
 </head>
-
 <body style="width: 98%;">
 
 <div style="width: 1000px; margin: 0 auto 0 auto;">
@@ -15,7 +14,7 @@
 <h1>Search Plus Options</h1>
 
 <ul id="navigation">
-	<li id="generalsearch" onclick="showOptions('general')"><a href="#">General</a></li>
+	<li id="generalsearch" onclick="showOptions('general')"><a href="#">Google</a></li>
 	<li id="websearch" onclick="showOptions('web')"><a href="#">Web Search</a></li>
 	<li id="imagesearch" onclick="showOptions('image')"><a href="#">Image Search</a></li>
 	<li id="mapsearch" onclick="showOptions('map')"><a href="#">Map Search</a></li>
@@ -28,22 +27,24 @@
 			<input onclick="setGeneralOption()" type="checkbox" id="autoredirect" />Auto redirect when your query were blocked.
 		</div>
 		<div class="generalopt">
+			<input onclick="setGeneralOption()" type="checkbox" id="homepage" />Redirect Google's homepage when it were blocked.
+		</div>
+		<div class="generalopt">
 			<input onclick="setGeneralOption()" type="checkbox" id="tryfix" />Try to fix the broken URL in Google's search result.
 		</div>
 		</div>
 		<div class="channel" id="searchcontent">
+			<div class="selist">Advanced Options:</div>
 			<div class="onlytwotips"><input id="imageOnlyTwo" type="checkbox">Only Use Primary and Secondary Search Engine<span class="highlight">(Just Switch no need to select Search Engine)</span></div>
 			<div class="selist">Search Engine List:<span class="highlight">(Drag & Drop Sort)</span></div>
 			<div class="searchcontiner">
 				<ul id="searchlists" class="searchegines">
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/google.ico">Google
-					
-					</li>
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/google.ico">Google</li>
 					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/baidu.ico">Baidu</li>
 					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/bing.ico">Bing</li>
 					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/sogou.ico">Sogou</li>
 					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/Soso.ico">Soso</li>
-					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/yahoo.ico">Yahoo!</li>
+					<li><img class="arrow" src="arrow.png"><img class="seicon" src="icons/yahoo.ico">Yahoo</li>
 				</ul>
 				<div class="primary">Primary</div>
 				<div class="secondary">Secondary</div>

@@ -14,18 +14,27 @@ var SEManager = {
 		},
 		set tryfix(value){
 			localStorage["general.tryfix"] = (value != false);
+		},
+		get homepage(){
+			return localStorage["general.homepage"] == "true";
+		},
+		set homepage(value){
+			localStorage["general.homepage"] = (value == true);
 		}
 	},
 	webSearch : {
-		primary : true,
+		primary : false,
 		order  : []
 	},
 	imageSearch : {
-		primary : true,
+		primary : false,
 		order   : []
 	},
+	count : function(){
+		return searchEngines.length;
+	},
 	mapSearch : {
-		primary : true,
+		primary : false,
 		order : []
 	},
 	getSearchEngine : function(index){
@@ -122,13 +131,13 @@ var SEManager = {
 		var opt = true;
 		switch(type){
 			case "web":
-				opt = (settings.webSearch.primary != "false");
+				opt = (settings.webSearch.primary == "true");
 				break;
 			case "image":
-				opt = (settings.imageSearch.primary != "false");
+				opt = (settings.imageSearch.primary == "true");
 				break;
 			case "map":
-				opt = (settings.mapSearch.primary != "false");
+				opt = (settings.mapSearch.primary == "true");
 				break;
 			default:
 				break;
@@ -160,9 +169,10 @@ var SEManager = {
 		}
 		return order;
 	},
-	setGeneralOptions : function(redirect, tryfix){
+	setGeneralOptions : function(redirect, homepage, tryfix){
 		this.general.redirect = redirect;
 		this.general.tryfix = tryfix;
+		this.general.homepage = homepage;
 	},
 	saveSEOrder : function(primary, value, type){
 		var name = "";
@@ -201,7 +211,7 @@ var SEManager = {
 		this[type+"Search"].primary = this.getPrimaryOptions(type);
 		if(!orderStr){
 			var orderStr = "";
-			var orders = this[orders+"Search"].order;
+			var orders = this[type+"Search"].order;
 			for(var i = 0, len = orders.length; i < len; i++){
 				orderStr = orderStr + searchEngines[orders[i]].name + ";";
 			}

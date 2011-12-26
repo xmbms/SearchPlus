@@ -32,6 +32,7 @@ function showGeneral(){
 	var bg = chrome.extension.getBackgroundPage();
 	document.getElementById("autoredirect").checked = bg.SEManager.general.redirect;
 	document.getElementById("tryfix").checked = bg.SEManager.general.tryfix;
+	document.getElementById("homepage").checked = bg.SEManager.general.homepage;
 }
 
 function showAbout(){
@@ -116,6 +117,7 @@ function saveSearchOrder(){
 function setGeneralOption(){
 	var redirect = document.getElementById("autoredirect").checked;
 	var tryfix = document.getElementById("tryfix").checked;
+	var homepage = document.getElementById("homepage").checked;
 	var bg = chrome.extension.getBackgroundPage();
-	bg.SEManager.setGeneralOptions(redirect, tryfix);
+	bg.SEManager.setGeneralOptions(redirect, homepage, tryfix);
 }
