@@ -21,7 +21,7 @@
 		"message" : "搜索引擎首页打开失败之后，首页也进行重定向"
 	},
 	"tryfixtips" :{
-		"message" : "尝试修复Google搜索结果中链接"
+		"message" : "尝试修复Google搜索结果中的失效链接"
 	},
 	"advanced" : {
 		"message" : "高级选项:"
@@ -65,7 +65,7 @@
 	"reset" : {
 		"message" : "重置"
 	},
-	"antiBlock" : {
-		"message" : "重定向"
+	"searchRedirect" : {
+		"message" : "搜索重定向"
 	}
 }

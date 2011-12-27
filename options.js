@@ -11,7 +11,7 @@ function i18n(){
 		"title", "WebSearch", "ImageSearch", "MapSearch", "AboutSearch",	
 		"autoredirecttips",	"homepagetips",	"tryfixtips", "advanced", 
 		"primayopt", "primary", "secondary", "savedtips", "features",
-		"f1", "f2", "author", "dragsort", "selisti18n", "antiBlock"
+		"f1", "f2", "author", "dragsort", "selisti18n", "searchRedirect"
 	];
 	var elem = null;
 	for(var i = 0, len = map.length; i < len; i++){

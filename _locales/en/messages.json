@@ -65,7 +65,7 @@
 	"reset" : {
 		"message" : "Reset"
 	},
-	"antiBlock" : {
-		"message" : "Anti Block"
+	"searchRedirect" : {
+		"message" : "Search Redirect"
 	}
 }
