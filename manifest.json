@@ -2,8 +2,7 @@
   "name": "SearchPlus",
   "version": "0.4",
   "default_locale" : "en",
-  "description": "This extension can help you switch in many search engines \
-  and it will automatically redirect your query to another search engine if your query is failed.",
+  "description": "This extension can help you switch in many search engines and it will automatically redirect your query to another search engine if your query is failed.",
   "background_page": "background.html",
   "options_page": "options.html",
   "page_action" : {
