@@ -1,0 +1,68 @@
+{
+	"title":{
+		"message" :"Search Plus Options"
+	},
+	"websearch" : {
+		"message" : "Web Search"
+	},
+	"ImageSearch" : {
+		"message" : "Image Search"
+	},
+	"MapSearch" : {
+		"message" : "Map Search"
+	},
+	"AboutSearch" : {
+		"message" : "about"
+	},
+	"autoredirecttips" : {
+		"message" : "Auto redirect when your query were blocked."
+	},
+	"homepagetips" : {
+		"message" : "Redirect Google's homepage when it were blocked."
+	},
+	"tryfixtips" :{
+		"message" : "Try to fix the broken URL in Google's search result."
+	},
+	"advanced" : {
+		"message" : "Advanced Options:"
+	},
+	"primayopt" : {
+		"message" : "Just Switch between Primary and Secondary Search Engine"
+	},
+	"primarytips" : {
+		"message" : "(Just Switch between Primary and Secondary Search Engine)"
+	},
+	"primary" : {
+		"message" : "Primary"
+	},
+	"secondary" : {
+		"message" : "Secondary"
+	},
+	"savedtips" : {
+		"message" : "Options saved..."
+	},
+	"features":{
+		"message" : "Feature List:"
+	},
+	"f1" : {
+		"message" : "Help you switching in many Search Engines."
+	},
+	"f2" : {
+		"message" : "When your search querys were blocked, automaticlly redirect to another search engine."
+	},
+	"author" : {
+		"message" : "About Author:"
+	},
+	"selisti18n" :{
+		"message" : "Search Engine List:"
+	},
+	"dragsort" : {
+		"message" : "(Drag & Drop Sort)"
+	},
+	"apply" : {
+		"message" : "Apply"
+	},
+	"reset" : {
+		"message" : "Reset"
+	}
+}

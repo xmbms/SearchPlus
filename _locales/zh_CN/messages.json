@@ -1,0 +1,68 @@
+﻿{
+	"title":{
+		"message" :"Search Plus 选项"
+	},
+	"WebSearch" : {
+		"message" : "网页搜索"
+	},
+	"ImageSearch" : {
+		"message" : "图片搜索"
+	},
+	"MapSearch" : {
+		"message" : "地图搜索"
+	},
+	"AboutSearch" : {
+		"message" : "关于"
+	},
+	"autoredirecttips" : {
+		"message" : "搜索被墙之后，自动重定向到其他搜索引擎"
+	},
+	"homepagetips" : {
+		"message" : "Google被墙时，首页也重定向"
+	},
+	"tryfixtips" :{
+		"message" : "尝试修复Google搜索结果中链接"
+	},
+	"advanced" : {
+		"message" : "高级选项:"
+	},
+	"primayopt" : {
+		"message" : "只在主副搜索引擎中切换"
+	},
+	"primarytips" : {
+		"message" : "(只在主副搜索引擎中切换)"
+	},
+	"primary" : {
+		"message" : "主搜索引擎"
+	},
+	"secondary" : {
+		"message" : "副搜索引擎"
+	},
+	"savedtips" : {
+		"message" : "已保存..."
+	},
+	"features":{
+		"message" : "特性:"
+	},
+	"f1" : {
+		"message" : "帮助你在不同搜索引擎中切换"
+	},
+	"f2" : {
+		"message" : "搜索被墙之后，自动重定向到其他搜索引擎"
+	},
+	"author" : {
+		"message" : "关于作者:"
+	},
+	"selisti18n" :{
+		"message" : "搜索引擎列表:"
+	},
+	"dragsort" : {
+		"message" : "(拖拽排序)"
+	},
+	"apply" : {
+		"message" : "应用"
+	},
+	"reset" : {
+		"message" : "重置"
+	}
+}
