@@ -1,0 +1,84 @@
+<html>
+<head><title>Search Plus Popup</title>
+<style type="text/css">
+body{
+	width : 100px;
+}
+.searchegines{
+	list-style:none; 
+	margin:0;
+	padding:0px;
+	width:100px;
+}
+.searchengine{
+	margin:0;
+	margin-top:5px;
+}
+a, a:visited{
+	text-decoration:none;
+	display:block;
+	padding:5px 2px 2px 0;
+	padding-left:5px;
+	color:black;
+}
+
+a:hover{
+	background: #2B477D;
+	border-radius:4px;
+	color:white;
+}
+
+.seicon{
+	margin-right:5px;
+}
+</style>
+<script type="text/javascript">
+
+var GTabId = -1;
+window.onload = function(){
+	chrome.tabs.getSelected(null,function(tab){
+		GTabId = tab.id;
+		var bg = chrome.extension.getBackgroundPage();
+		var info = bg.SEManager.getSearchEngineInfo(tab.url);
+		var orders = bg.SEManager.getSEOrder(info.type);
+		var template = [
+			"<li class=\"searchengine\" onclick=\"redirectTo(this.id)\" id=\"",
+			"", //se name;
+			"\"><a href=\"#\"><img class=\"seicon\" src=\"",
+			"", //icon
+			"\">",
+			"", //se name
+			"</a></li>"
+		];
+		var elem = document.getElementById("searchlists");
+		elem.innerHTML = "";
+		var html = "";
+		for(var i = 0, len = orders.length; i < len; i++){
+			if(info.name != orders[i].name){
+				template[1] = orders[i].name;
+				template[3] = orders[i].icon;
+				template[5] = orders[i].name;
+				html = html + template.join("");
+			}
+		}
+		elem.innerHTML = html;
+	})
+}
+
+function redirectTo(name){
+	chrome.tabs.get(GTabId, function(tab){
+		var bg = chrome.extension.getBackgroundPage();
+		var index = bg.SEManager.getSEIndexByName(name);
+		if(tab){
+			bg.switchSearchEngine(tab, index);
+		}
+		window.close();
+	});
+}
+</script>
+</head>
+<body>
+<ul id="searchlists" class="searchegines">
+</ul>
+</body>
+</html>
