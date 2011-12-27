@@ -1,4 +1,7 @@
 ﻿{
+	"description" : {
+		"message" : "Search Plus帮助你在多个搜索引擎之间切换，并且某个搜索引擎查询失败后会自动切换到其他搜索引擎进行查询。"
+	},
 	"title":{
 		"message" :"Search Plus 选项"
 	},
