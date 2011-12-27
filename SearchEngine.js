@@ -97,7 +97,7 @@ var SearchEngine = {
 			case "map":
 				return this.parseMapSearchURI(url);
 			default:
-				return "";
+				return {};
 		}
 	},
 	getQueryURL : function(info){

@@ -1,6 +1,7 @@
 chrome.webNavigation.onErrorOccurred.addListener(function(details) {
 	if(details.frameId == 0){
 		var info = SEManager.getSearchEngineInfo(details.url);
+		if(!info){return false;}
 		var uri = new Uri(details.url);
 		var gotoURL = "";
 		var markIndex = -1;
@@ -10,12 +11,7 @@ chrome.webNavigation.onErrorOccurred.addListener(function(details) {
 			gotoURL = SearchEngine.decode(fixURL); //need more details
 		} else {
 			var se = SEManager.getSearchEngine(info.index);
-			var queryInfo ;
-			try{
-				queryInfo = se.getQueryInfo(details.url, info.type);
-			} catch(e){
-				console.info(details.url);
-			}
+			var queryInfo = se.getQueryInfo(details.url, info.type);
 			if((queryInfo.content && SEManager.general.redirect)
 				|| (!queryInfo.content && SEManager.general.homepage)){
 				var begin = parseInt(uri.getQueryParamValue("SearchPlusIndex"));
