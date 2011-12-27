@@ -84,7 +84,10 @@ function getQueryContent(id, name){
 	var value = "";
 	var elem = document.getElementById(id || "");
 	if(!elem){
-		elem = document.getElementByName(name || "");
+		elem = document.getElementsByName(name || "");
+		if(elem && elem.length){
+			elem = elem[0];
+		}
 	}
 	if(elem){
 		value = elem.value;
@@ -119,8 +122,9 @@ function switchSearchEngine(tab, nextSEIndex){
 	var contentScript = getQueryContent.toString() + "; getQueryContent(\"" + 
 		inputInfo.id + "\", \"" + inputInfo.name + "\")";
 	try{
-		chrome.tabs.executeScript(null, {code:contentScript}, function(a){});
-		ActiveTimer = setTimeout(function(){switchURL();}, waitResponseTime);
+		chrome.tabs.executeScript(null, {code:contentScript}, function(a){
+			ActiveTimer = setTimeout(function(){switchURL();}, waitResponseTime);
+		});
 	} catch(e){
 		switchURL(tab.id, index, ActiveQueryInfo);
 	}

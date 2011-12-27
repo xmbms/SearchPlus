@@ -17,8 +17,8 @@ Soso.imageSearch = {
 };
 Soso.mapSearch = {
 	support : true,
-	inputId   : "query",
-	inputName : "what"
+	inputId   : "PoiSearch",
+	inputName : "keyword"
 };
 
 Soso.getQueryType = function(url){

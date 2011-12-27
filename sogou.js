@@ -7,7 +7,7 @@ Sogou.domains = ["com", "cn", "com.cn"];
 
 Sogou.webSearch = {
 	support : true,
-	inputId   : "query",
+	inputId   : "query", //another is upquery
 	inputName : "query" 
 };
 Sogou.imageSearch = {
