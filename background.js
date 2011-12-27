@@ -1,30 +1,40 @@
 chrome.webNavigation.onErrorOccurred.addListener(function(details) {
 	if(details.frameId == 0){
 		var info = SEManager.getSearchEngineInfo(details.url);
-		if(info.name && info.name.toLowerCase() == "google"){
-			var google = SEManager.getSearchEngine(info.index);
-			var queryInfo = google.getQueryInfo(details.url, info.type);
-			if(!(queryInfo.content || SEManager.general.homepage)){
-				return false;
+		var uri = new Uri(details.url);
+		var gotoURL = "";
+		var markIndex = -1;
+		if(info.name && info.name.toLowerCase() == "google" &&
+			uri.path().toLowerCase() == "/url" && SEManager.general.tryfix){
+			var fixURL = uri.getQueryParamValue("url");
+			gotoURL = SearchEngine.decode(fixURL); //need more details
+		} else {
+			var se = SEManager.getSearchEngine(info.index);
+			var queryInfo ;
+			try{
+				queryInfo = se.getQueryInfo(details.url, info.type);
+			} catch(e){
+				console.info(details.url);
 			}
-			var uri = new Uri(details.url);
-			var gotoURL = "";
-			if(uri.path().toLowerCase() == "/url" && SEManager.general.tryfix){
-				var fixURL = uri.getQueryParamValue("url");
-				gotoURL = SearchEngine.decode(fixURL); //need more details
-			}
-			if(SEManager.general.redirect){
+			if((queryInfo.content && SEManager.general.redirect)
+				|| (!queryInfo.content && SEManager.general.homepage)){
+				var begin = parseInt(uri.getQueryParamValue("SearchPlusIndex"));
+				if(isNaN(begin)){
+					begin = -1;
+				}
 				var index = SEManager.searchNextSearchIndexInOrder(info.index, 
-										info.type);
+										info.type, begin);
+				markIndex = index;
 				if(index != -1){
 					var se = SEManager.getSearchEngine(index);
 					gotoURL = se.getQueryURL(queryInfo);
 				}
 			}
-			if(gotoURL){
-				gotoURL = markSearchPlus(gotoURL);
-				chrome.tabs.update(details.tabId,{url:gotoURL});
-			}
+		}
+		if(gotoURL){
+			gotoURL = markSearchPlus(gotoURL);
+			gotoURL = markSearchEngineIndex(gotoURL, markIndex);
+			chrome.tabs.update(details.tabId,{url:gotoURL});
 		}
 	}
 });
@@ -51,6 +61,15 @@ function checkValidSearchEngineUrl(tabId, changeInfo, tab) {
 		}
 	}
 };
+
+function markSearchEngineIndex(url, index){
+	if(!url) return "";
+	if(url.indexOf("?") == -1){
+		return url + "?SearchPlusIndex=" + index;
+	} else {
+		return url + "&SearchPlusIndex=" + index;
+	}
+}
 
 function markSearchPlus(url){
 	if(!url) return "";
@@ -100,11 +119,8 @@ function switchSearchEngine(tab, nextSEIndex){
 	var contentScript = getQueryContent.toString() + "; getQueryContent(\"" + 
 		inputInfo.id + "\", \"" + inputInfo.name + "\")";
 	try{
-		chrome.tabs.executeScript(null, {code:contentScript}, function(a){
-			ActiveTimer = setTimeout(function(){
-				switchURL();
-			}, waitResponseTime);
-		});
+		chrome.tabs.executeScript(null, {code:contentScript}, function(a){});
+		ActiveTimer = setTimeout(function(){switchURL();}, waitResponseTime);
 	} catch(e){
 		switchURL(tab.id, index, ActiveQueryInfo);
 	}

@@ -18,7 +18,7 @@
 		"message" : "Auto redirect when your query were blocked."
 	},
 	"homepagetips" : {
-		"message" : "Redirect Google's homepage when it were blocked."
+		"message" : "Redirect Search Engine's homepage when it were blocked."
 	},
 	"tryfixtips" :{
 		"message" : "Try to fix the broken URL in Google's search result."
@@ -64,5 +64,8 @@
 	},
 	"reset" : {
 		"message" : "Reset"
+	},
+	"antiBlock" : {
+		"message" : "Anti Block"
 	}
 }

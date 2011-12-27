@@ -11,7 +11,7 @@ function i18n(){
 		"title", "WebSearch", "ImageSearch", "MapSearch", "AboutSearch",	
 		"autoredirecttips",	"homepagetips",	"tryfixtips", "advanced", 
 		"primayopt", "primary", "secondary", "savedtips", "features",
-		"f1", "f2", "author", "dragsort", "selisti18n"
+		"f1", "f2", "author", "dragsort", "selisti18n", "antiBlock"
 	];
 	var elem = null;
 	for(var i = 0, len = map.length; i < len; i++){
@@ -94,9 +94,13 @@ function showSEOptions(type){
 function saveOrder(item) {
 	var group = item.toolManDragGroup
 	group.register('dragend', function() {
-		var elem = document.getElementById("savedtips");
-		elem.style.display = "none";
+		hideSaveTips();
 	})
+}
+
+function hideSaveTips(){
+	var elem = document.getElementById("savedtips");
+	elem.style.display = "none";
 }
 
 function showTab(type){

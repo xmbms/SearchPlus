@@ -105,7 +105,7 @@ var SEManager = {
 			return null;
 		}
 	},
-	searchNextSearchIndexInOrder : function(index, type){
+	searchNextSearchIndexInOrder : function(index, type, begin){
 		var searchOrder = [];
 		switch(type){
 			case "web":
@@ -120,7 +120,10 @@ var SEManager = {
 			default:
 				break;
 		}
-		for(var i = 0, len = searchOrder.length; i < len; i++){
+		if(begin == undefined){
+			begin = -1;
+		}
+		for(var i = begin + 1, len = searchOrder.length; i < len; i++){
 			if(searchOrder[i] != index){
 				return searchOrder[i];
 			}

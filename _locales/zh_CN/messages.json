@@ -15,10 +15,10 @@
 		"message" : "关于"
 	},
 	"autoredirecttips" : {
-		"message" : "搜索被墙之后，自动重定向到其他搜索引擎"
+		"message" : "搜索失败之后，自动重定向到其他搜索引擎"
 	},
 	"homepagetips" : {
-		"message" : "Google被墙时，首页也重定向"
+		"message" : "搜索引擎首页打开失败之后，首页也进行重定向"
 	},
 	"tryfixtips" :{
 		"message" : "尝试修复Google搜索结果中链接"
@@ -48,7 +48,7 @@
 		"message" : "帮助你在不同搜索引擎中切换"
 	},
 	"f2" : {
-		"message" : "搜索被墙之后，自动重定向到其他搜索引擎"
+		"message" : "搜索失败之后，自动重定向到其他搜索引擎"
 	},
 	"author" : {
 		"message" : "关于作者:"
@@ -64,5 +64,8 @@
 	},
 	"reset" : {
 		"message" : "重置"
+	},
+	"antiBlock" : {
+		"message" : "重定向"
 	}
 }
