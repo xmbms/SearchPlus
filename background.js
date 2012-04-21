@@ -162,5 +162,6 @@ SEManager.addSearchEngine(Baidu);
 SEManager.addSearchEngine(Bing);
 SEManager.addSearchEngine(Sogou);
 SEManager.addSearchEngine(Soso);
+SEManager.addSearchEngine(Youdao);
 SEManager.addSearchEngine(Yahoo);
 SEManager.initOptions();
