@@ -151,7 +151,8 @@ ul#navigation li.selected a:link, ul#navigation li.selected a:visited {
 }
 
 .highlight{
-	color:red;
+	margin-left:10px;
+	font-size:12px;
 }
 
 .searchegines li{
