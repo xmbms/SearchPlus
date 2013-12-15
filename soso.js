@@ -1,6 +1,7 @@
 var Soso = {};
 ImplementInterface(Soso, SearchEngine);
 Soso.name = "Soso";
+Soso.host = "Soso";
 Soso.icon = "icons/soso.ico"
 Soso.prefixes=["www", "image", "ditu", "map"];
 Soso.domains = ["com", "com.cn"];

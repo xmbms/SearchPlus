@@ -60,7 +60,7 @@
 		"message" : "Search Engine List:"
 	},
 	"dragsort" : {
-		"message" : "(Drag & Drop Sort)"
+		"message" : "(Drag & Drop Sort, and use the checkbox to enable/disable search engine.)"
 	},
 	"apply" : {
 		"message" : "Apply"

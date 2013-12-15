@@ -60,7 +60,7 @@
 		"message" : "搜索引擎列表:"
 	},
 	"dragsort" : {
-		"message" : "(拖拽排序)"
+		"message" : "(拖拽排序,使用复选框打开或关闭搜素引擎)"
 	},
 	"apply" : {
 		"message" : "应用"

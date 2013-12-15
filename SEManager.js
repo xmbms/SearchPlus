@@ -43,6 +43,26 @@ var SEManager = {
 		}
 		return searchEngines[index];
 	},
+	isDisabledSearchEngine : function(name, type) {
+		if(!name || !type) return false;
+		var disabledSearchEngine = "";
+		switch(type){
+			case "web":
+				disabledSearchEngine = settings.webSearch.disabledSearchEngine;
+				break;
+			case "image":
+				disabledSearchEngine = settings.imageSearch.disabledSearchEngine;
+				break;
+			case "map":
+				disabledSearchEngine = settings.mapSearch.disabledSearchEngine;
+				break;
+			default:
+				return false;
+		}
+		var reg = new RegExp("\\b" + name + "\\b", "i");
+		return disabledSearchEngine.match(reg);
+		
+	},
 	getSEIndexByName : function(name){
 		for(var i = 0, len = searchEngines.length; i < len; i++){
 			if(searchEngines[i].name == name){
@@ -69,7 +89,7 @@ var SEManager = {
 	updateDomainReg : function(){
 		var txt = "";
 		for(var i = 0, len = searchEngines.length; i < len; i++){
-			txt = txt + searchEngines[i].name.toLowerCase() + "\.|";
+			txt = txt + searchEngines[i].host.toLowerCase() + "\.|";
 		}
 		if(txt){
 			txt = txt.substr(0, txt.length - 1);
@@ -177,32 +197,29 @@ var SEManager = {
 		this.general.tryfix = tryfix;
 		this.general.homepage = homepage;
 	},
-	saveSEOrder : function(primary, value, type){
+	saveSEOrder : function(primary, seOrder, disabledSE, type){
 		var name = "";
-		var order = [];
 		switch(type){
 			case "web":
 				name = "webSearch";
 				settings.webSearch.primary = primary;
-				order = this.webSearch.order;
 				break;
 			case "image":
 				name = "imageSearch";
 				settings.imageSearch.primary = primary;
-				order = this.webSearch.order;
 				break;
 			case "map":
 				name = "mapSearch";
 				settings.mapSearch.primary = primary;
-				order = this.mapSearch.order;
 				break;
 			default:
 				break;
 		}
 		if(name){
-			settings[name].order = value;
+			settings[name].order = seOrder;
+			settings[name].disabledSearchEngine = disabledSE;
 		}
-		this.initOrder(type, order);		
+		this.initOrder(type);		
 	},
 	initOptions : function(){
 		this.initOrder("web");
@@ -232,6 +249,7 @@ var SEManager = {
 					}
 				}
 			}
+			//Add the search engines those were not listed in the search engine order settings.
 			for(var i = 0, len = searchEngines.length; i < len; i++){
 				if(!map[i] && searchEngines[i][type+"Search"].support){
 					this[type+"Search"].order.push(i);

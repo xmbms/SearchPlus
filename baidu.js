@@ -1,6 +1,7 @@
 var Baidu = {};
 ImplementInterface(Baidu, SearchEngine);
 Baidu.name = "Baidu";
+Baidu.host = "Baidu";
 Baidu.prefixes=["www", "image", "tupian", "map", "ditu"];
 Baidu.domains = ["com","com.cn","cn","com.jp","jp"];
 

@@ -30,52 +30,11 @@ a:hover{
 
 .seicon{
 	margin-right:5px;
+	height: 16px;
+	width: 16px;
 }
 </style>
-<script type="text/javascript">
-
-var GTabId = -1;
-window.onload = function(){
-	chrome.tabs.getSelected(null,function(tab){
-		GTabId = tab.id;
-		var bg = chrome.extension.getBackgroundPage();
-		var info = bg.SEManager.getSearchEngineInfo(tab.url);
-		var orders = bg.SEManager.getSEOrder(info.type);
-		var template = [
-			"<li class=\"searchengine\" onclick=\"redirectTo(this.id)\" id=\"",
-			"", //se name;
-			"\"><a href=\"#\"><img class=\"seicon\" src=\"",
-			"", //icon
-			"\">",
-			"", //se name
-			"</a></li>"
-		];
-		var elem = document.getElementById("searchlists");
-		elem.innerHTML = "";
-		var html = "";
-		for(var i = 0, len = orders.length; i < len; i++){
-			if(info.name != orders[i].name){
-				template[1] = orders[i].name;
-				template[3] = orders[i].icon;
-				template[5] = orders[i].name;
-				html = html + template.join("");
-			}
-		}
-		elem.innerHTML = html;
-	})
-}
-
-function redirectTo(name){
-	chrome.tabs.get(GTabId, function(tab){
-		var bg = chrome.extension.getBackgroundPage();
-		var index = bg.SEManager.getSEIndexByName(name);
-		if(tab){
-			bg.switchSearchEngine(tab, index);
-		}
-		window.close();
-	});
-}
-</script>
+<script type="text/javascript" src="popup.js"></script>
 </head>
 <body>
 <ul id="searchlists" class="searchegines">

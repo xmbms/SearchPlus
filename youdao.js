@@ -1,6 +1,7 @@
 var Youdao = {};
 ImplementInterface(Youdao, SearchEngine);
 Youdao.name = "Youdao";
+Youdao.host = "Youdao";
 Youdao.icon = "icons/youdao.ico"
 Youdao.prefixes=["www", "image"]; //, "ditu", "map"
 Youdao.domains = ["com"];

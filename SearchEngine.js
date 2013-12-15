@@ -3,7 +3,8 @@
  */
  
 var SearchEngine = {
-	name : "Search Engine",
+	name : "Search engine name",
+	host : "Host name",
 	webSearch : {
 		support   : false,
 		inputId   : "",
@@ -40,11 +41,11 @@ var SearchEngine = {
 		return true;
 	},
 	getHostInfo : function(host){
-		var reg = new RegExp("(.+)\." + this.name + "\.(.+)", "i");
+		var reg = new RegExp("([^.]+)?\.?" + this.host + "\.(.+)$", "i");
 		var pattern = reg.exec(host);
 		if(pattern && pattern.length == 3){
 			return {
-				prefix : pattern[1],
+				prefix : pattern[1] || "",
 				postfix: pattern[2]
 			}
 		}

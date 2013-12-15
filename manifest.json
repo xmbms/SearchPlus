@@ -1,9 +1,12 @@
 {
   "name": "SearchPlus",
-  "version": "0.5",
+  "manifest_version": 2,
+  "version": "0.6",
   "default_locale" : "zh_CN",
   "description": "__MSG_description__",
-  "background_page": "background.html",
+  "background": {
+    "page": "background.html"
+  },
   "options_page": "options.html",
   "page_action" : {
 	"default_icon": "icon.png",

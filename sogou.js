@@ -1,6 +1,7 @@
 var Sogou = {};
 ImplementInterface(Sogou, SearchEngine);
 Sogou.name = "Sogou";
+Sogou.host = "Sogou";
 Sogou.icon = "icons/sogou.ico"
 Sogou.prefixes=["www", "pic", "image", "ditu", "map"];
 Sogou.domains = ["com", "cn", "com.cn"];

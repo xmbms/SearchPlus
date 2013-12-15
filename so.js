@@ -1,37 +1,38 @@
-var Yahoo = {};
-ImplementInterface(Yahoo, SearchEngine);
-Yahoo.name = "Yahoo";
-Yahoo.host = "Yahoo";
-Yahoo.icon = "icons/yahoo.ico"
-Yahoo.prefixes=["www", "image", "ditu", "map"];
-Yahoo.domains = ["cn"];
+var So = {};
+ImplementInterface(So, SearchEngine);
+So.name = "360";
+So.host = "so";
+So.icon = "icons/so.ico"
+So.prefixes=["www", "image", "ditu", "map"];
+So.domains = ["com"];
 
-Yahoo.webSearch = {
+So.webSearch = {
 	support : true,
-	inputId   : "p",
+	inputId   : "input",
 	inputName : "q" 
 };
-Yahoo.imageSearch = {
+So.imageSearch = {
 	support : true,
-	inputId   : "p",
+	inputId   : "search_kw",
 	inputName : "q"
 };
-Yahoo.mapSearch = {
+So.mapSearch = {
 	support : true,
-	inputId   : "keyword",
+	inputId   : "keywordTxt",
 	inputName : "q"
 };
 
-Yahoo.getQueryType = function(url){
+So.getQueryType = function(url){
 	var uri = new Uri(url);
 	var host = uri.host().toLowerCase();
 	var path = uri.path().toLowerCase();
 	var info = this.getHostInfo(host);
-	if(!info || info.postfix != "cn") return "unknown";
+	if(!info) return "unknown";
 	switch(info.prefix){
 		case "www":
 			return "web";
 		case "image":
+		case "pic":
 			return "image";
 		case "ditu":
 		case "map":
@@ -41,16 +42,16 @@ Yahoo.getQueryType = function(url){
 	}
 }
 
-Yahoo.parseWebSearchURI = function(url){
+So.parseWebSearchURI = function(url){
 	var uri = new Uri(url);
 	var query = new WebQuery();
-	var content = uri.getQueryParamValue("q");
+	var content = uri.getQueryParamValue("w");
 	query.content = this.decode(content);
 	return query;
 }
 
-Yahoo.getWebSearchURI = function(info){
-	var prefix = "http://www.yahoo.cn/s?";
+So.getWebSearchURI = function(info){
+	var prefix = "http://www.so.com/s?ie=utf-8&src=SearchPlus&ms=&";
 	if(!info) return prefix;
 	info.content = (info.content || "").replace("+", " ");
 	var query = {
@@ -60,14 +61,14 @@ Yahoo.getWebSearchURI = function(info){
 	return prefix + queryURL;	
 }
 
-Yahoo.parseImageSearchURI = function(url){
-	var info = Yahoo.parseWebSearchURI(url);
+So.parseImageSearchURI = function(url){
+	var info = So.parseWebSearchURI(url);
 	info.type = "image";
 	return info;
 };
 
-Yahoo.getImageSearchURI = function(info){
-	var prefix = "http://image.yahoo.cn/s?";
+So.getImageSearchURI = function(info){
+	var prefix = "http://image.so.com/i?ie=utf-8&src=SearchPlus&";
 	if(!info) return prefix;
 	info.content = (info.content || "").replace("+", " ");
 	var query = {
@@ -77,18 +78,18 @@ Yahoo.getImageSearchURI = function(info){
 	return prefix + queryURL;	
 }
 
-Yahoo.parseMapSearchURI = function(url){
-	var info = Yahoo.parseWebSearchURI(url);
+So.parseMapSearchURI = function(url){
+	var info = So.parseWebSearchURI(url);
 	info.type = "map";
 	return info;
 };
 
-Yahoo.getMapSearchURI = function(info){
-	var prefix = "http://ditu.yahoo.cn/?";
+So.getMapSearchURI = function(info){
+	var prefix = "http://map.so.com/?ie=utf-8&t=map&src=SearchPlus&";
 	if(!info) return prefix;
 	info.content = (info.content || "").replace("+", " ");
 	var query = {
-		"q" : this.encode(info.content)
+		"k" : this.encode(info.content)
 	};
 	var queryURL = this.joinQueryKeyWords(query);
 	return prefix + queryURL;	

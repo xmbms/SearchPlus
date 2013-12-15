@@ -14,23 +14,23 @@
 <h1 id="title">Search Plus Options</h1>
 
 <ul id="navigation">
-	<li id="generalsearch" onclick="showOptions('general')"><a href="#" id="searchRedirect">Search Redirect</a></li>
-	<li id="websearch" onclick="showOptions('web')"><a href="#" id="WebSearch">Web Search</a></li>
-	<li id="imagesearch" onclick="showOptions('image')"><a href="#" id="ImageSearch">Image Search</a></li>
-	<li id="mapsearch" onclick="showOptions('map')"><a href="#" id="MapSearch">Map Search</a></li>
-	<li id="aboutsearch" onclick="showOptions('about')"><a href="#" id="AboutSearch">About</a></li>
+	<li id="generalsearch"><a href="#" id="searchRedirect">Search Redirect</a></li>
+	<li id="websearch"><a href="#" id="WebSearch">Web Search</a></li>
+	<li id="imagesearch"><a href="#" id="ImageSearch">Image Search</a></li>
+	<li id="mapsearch"><a href="#" id="MapSearch">Map Search</a></li>
+	<li id="aboutsearch"><a href="#" id="AboutSearch">About</a></li>
 </ul>
 
 	<div id="content">
 		<div class="channel" id="generalcontent" style="display:none">
 		<div class="generalopt">
-			<input onclick="setGeneralOption()" type="checkbox" id="autoredirect" /><span id="autoredirecttips">Auto redirect when your query were blocked.</span>
+			<input type="checkbox" id="autoredirect" /><span id="autoredirecttips">Auto redirect when your query were blocked.</span>
 		</div>
 		<div class="generalopt">
-			<input onclick="setGeneralOption()" type="checkbox" id="homepage" /><span id="homepagetips">Redirect Google's homepage when it were blocked.</span>
+			<input type="checkbox" id="homepage" /><span id="homepagetips">Redirect Google's homepage when it were blocked.</span>
 		</div>
 		<div class="generalopt">
-			<input onclick="setGeneralOption()" type="checkbox" id="tryfix" /><span id="tryfixtips">Try to fix the broken URL in Google's search result.</span>
+			<input type="checkbox" id="tryfix" /><span id="tryfixtips">Try to fix the broken URL in Google's search result.</span>
 		</div>
 		</div>
 		<div class="channel" id="searchcontent">
@@ -44,7 +44,7 @@
 				<div class="secondary" id="secondary">Secondary</div>
 			</div>
 			<div>
-			<div class="btngroup"><input onclick="saveSearchOrder()" class="sebtn" id="applybtn" type="button" value="Apply" /><input id="resetbtn" onclick="resetSearchOrder()"  class="sebtn"  type="button" value="Reset" /><span class="saved" id="savedtips" style="display:none;">Options saved...</span></div>
+			<div class="btngroup"><input class="sebtn" id="applybtn" type="button" value="Apply" /><input id="resetbtn" class="sebtn"  type="button" value="Reset" /><span class="saved" id="savedtips" style="display:none;">Options saved...</span></div>
 			
 			</div>
 		</div>

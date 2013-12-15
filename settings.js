@@ -25,6 +25,12 @@ var settings = {
 		},
 		set order(value){
 			localStorage["webSearch.order"] = value;
+		},
+		get disabledSearchEngine () {
+			return localStorage["webSearch.disabledSearchEngine"] || "";
+		},
+		set disabledSearchEngine (value){
+			localStorage["webSearch.disabledSearchEngine"] = value || "";
 		}
 	},
 	imageSearch : {
@@ -39,6 +45,12 @@ var settings = {
 		},
 		set order(value){
 			localStorage["imageSearch.order"] = value;
+		},
+		get disabledSearchEngine () {
+			return localStorage["imageSearch.disabledSearchEngine"] || "";
+		},
+		set disabledSearchEngine (value){
+			localStorage["imageSearch.disabledSearchEngine"] = value || "";
 		}
 	},
 	mapSearch : {
@@ -53,6 +65,12 @@ var settings = {
 		},
 		set order(value){
 			localStorage["mapSearch.order"] = value;
+		},
+		get disabledSearchEngine () {
+			return localStorage["mapSearch.disabledSearchEngine"] || "";
+		},
+		set disabledSearchEngine (value){
+			localStorage["mapSearch.disabledSearchEngine"] = value || "";
 		}
 	}
 }

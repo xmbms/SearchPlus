@@ -1,6 +1,7 @@
 var Google = {};
 ImplementInterface(Google, SearchEngine);
 Google.name = "Google";
+Google.host = "Google";
 Google.webSearchSupported   = true;
 Google.imageSearchSupported = true;
 Google.mapSearchSupported   = true;

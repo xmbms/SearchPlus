@@ -4,6 +4,25 @@ var searchType = "web";
 window.onload = function(){
 	i18n();
 	resetSearchOrder();
+	bindEvent();
+}
+
+function bindEvent() {
+	//navigation
+	document.getElementById("generalsearch").addEventListener("click", function() {showOptions('general');}, false);
+	document.getElementById("websearch").addEventListener("click", function() {showOptions('web');}, false);
+	document.getElementById("imagesearch").addEventListener("click", function() {showOptions('image');}, false);
+	document.getElementById("mapsearch").addEventListener("click", function() {showOptions('map');}, false);
+	document.getElementById("aboutsearch").addEventListener("click", function() {showOptions('about');}, false);
+	
+	//setGeneralOption
+	document.getElementById("autoredirect").addEventListener("click", function() {setGeneralOption();}, false);
+	document.getElementById("homepage").addEventListener("click", function() {setGeneralOption();}, false);
+	document.getElementById("aboutsearch").addEventListener("click", function() {setGeneralOption();}, false);
+	
+	//save and reset order
+	document.getElementById("applybtn").addEventListener("click", function() {saveSearchOrder();}, false);
+	document.getElementById("resetbtn").addEventListener("click", function() {resetSearchOrder();}, false);
 }
 
 function i18n(){
@@ -74,14 +93,21 @@ function showSEOptions(type){
 	var lists = document.getElementById("searchlists");
 	lists.innerHTML = "";
 	var template = [
-		"<img class=\"arrow\" src=\"arrow.png\"><img class=\"seicon\" src=\"",
+		"<input type=checkbox ",
+		"", //checked or not
+		"/><img class=\"arrow\" src=\"arrow.png\"><img class=\"seicon\" src=\"",
 		"", //image src
 		"\">",
 		"" //se name
 	]
 	for(var i = 0, len = order.length; i < len; i++){
-		template[1] = order[i].icon;
-		template[3] = order[i].name;
+		if(bg.SEManager.isDisabledSearchEngine(order[i].name, searchType)) {
+			template[1] =  "";
+		} else {
+			template[1] =  "checked";
+		}
+		template[3] = order[i].icon;
+		template[5] = order[i].name;
 		var li = document.createElement("li");
 		li.id = order[i].name;
 		li.innerHTML = template.join("");
@@ -131,13 +157,18 @@ function resetSearchOrder(){
 function saveSearchOrder(){
 	var lists = document.getElementById("searchlists");
 	var orders = lists.getElementsByTagName("li");
-	var savedStr = "";
+	var seOrder = "";
+	var disabledSE = "";
 	for(var i = 0, len= orders.length; i < len; i++){
-		savedStr = savedStr + orders[i].id + ";";
+		seOrder = seOrder + orders[i].id + ";";
+		var checkBox = orders[i].getElementsByTagName("input");
+		if(checkBox && !checkBox[0].checked) {
+			disabledSE = disabledSE + orders[i].id + ";";
+		}
 	}
 	var primary = document.getElementById("imageOnlyTwo").checked;
 	var bg = chrome.extension.getBackgroundPage();
-	bg.SEManager.saveSEOrder(primary, savedStr, searchType);
+	bg.SEManager.saveSEOrder(primary, seOrder, disabledSE, searchType);
 	var elem = document.getElementById("savedtips");
 	elem.style.display = "";
 }

@@ -1,6 +1,7 @@
 var Bing = {};
 ImplementInterface(Bing, SearchEngine);
 Bing.name = "Bing";
+Bing.host = "Bing";
 Bing.icon = "icons/bing.ico"
 Bing.prefixes=[];
 Bing.domains = ["com","com.cn","cn"];

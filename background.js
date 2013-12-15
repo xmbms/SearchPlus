@@ -92,7 +92,7 @@ function getQueryContent(id, name){
 }
 
 var ActiveTabContent = "";
-var ActiveTabKey = true;
+var ActiveProcessLock = true;
 var ActiveTimer = null;
 var ActiveQuery = {
 	id : -1,
@@ -102,7 +102,7 @@ var ActiveQuery = {
 var waitResponseTime = 15;
 function switchSearchEngine(tab, nextSEIndex){
 	ActiveTabContent = "";
-	ActiveTabKey = true;
+	ActiveProcessLock = true;
 	var info = SEManager.getSearchEngineInfo(tab.url);
 	if(!info || info.type == "unknown") return false;
 	var se = SEManager.getSearchEngine(info.index);
@@ -119,17 +119,21 @@ function switchSearchEngine(tab, nextSEIndex){
 		inputInfo.id + "\", \"" + inputInfo.name + "\")";
 	try{
 		chrome.tabs.executeScript(null, {code:contentScript}, function(a){
-			ActiveTimer = setTimeout(function(){switchURL();}, waitResponseTime);
+			ActiveTimer = setTimeout(function(){
+				if(ActiveProcessLock) {
+					switchURL();
+				}
+			}, waitResponseTime);
 		});
 	} catch(e){
-		switchURL(tab.id, index, ActiveQueryInfo);
+		switchURL();
 	}
 }
 
 function switchURL(){
 	clearTimeout(ActiveTimer);
-	if(ActiveTabKey){
-		ActiveTabKey = false;
+	if(ActiveProcessLock){
+		ActiveProcessLock = false;
 		var se = SEManager.getSearchEngine(ActiveQuery.index);
 		if(se){
 			var gotoURL = se.getQueryURL(ActiveQuery.info);
@@ -148,7 +152,7 @@ function switchURL(){
 
 chrome.extension.onRequest.addListener(
 	function(request, sender, sendResponse) {
-		if(ActiveTabKey && request.content){
+		if(ActiveProcessLock && request.content){
 			ActiveQuery.info.content = request.content;
 			switchURL();
 		}
@@ -158,8 +162,12 @@ chrome.tabs.onUpdated.addListener(checkValidSearchEngineUrl);
 chrome.pageAction.onClicked.addListener(switchSearchEngine);
 
 SEManager.addSearchEngine(Google);
+SEManager.addSearchEngine(Amap);
 SEManager.addSearchEngine(Baidu);
 SEManager.addSearchEngine(Bing);
+SEManager.addSearchEngine(Duckduckgo);
+SEManager.addSearchEngine(QQ);
+SEManager.addSearchEngine(So);
 SEManager.addSearchEngine(Sogou);
 SEManager.addSearchEngine(Soso);
 SEManager.addSearchEngine(Youdao);
