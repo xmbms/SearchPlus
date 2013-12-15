@@ -1,4 +1,4 @@
-# Search Plus
+# Search Plus v0.7
 
 This chrome extension can help you switch in many search engines 
 and it will automatically redirect your query to another search engine if your query is failed.
