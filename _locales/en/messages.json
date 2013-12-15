@@ -1,6 +1,6 @@
 {
 	"description" : {
-		"message" : "This extension can help you switch in many search engines and it will automatically redirect your query to another search engine if your query is failed."
+		"message" : "This extension can help you switch queries in many search engines."
 	},
 	"title":{
 		"message" :"Search Plus Options"
